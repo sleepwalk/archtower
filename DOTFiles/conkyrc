@@ -1,1 +1,38 @@
-/home/lucian/.conkyrc
+alignment top_right
+background true
+border_inner_margin 0
+border_outer_margin 0
+border_width 0
+own_window true
+own_window_type normal
+own_window_hints below,sticky,skip_taskbar,skip_pager,undecorated
+own_window_transparent true
+use_xft true
+xftfont DejaVuSans:size=10
+maximum_width 220
+total_run_times 0
+double_buffer yes
+
+TEXT
+${font OpenLogos:size=80}B$font${voffset -30}
+${color red}Username: ${color white}${alignr}${execp echo $USER}${color red}
+Kernel:${color white} ${alignr}$kernel${color red}
+Uptime:${color white} ${alignr}$uptime${color red}
+CPU: ${alignr}${color white}$freq_g Ghz $cpu%
+$stippled_hr${color red}
+Memory: ${color white}${memperc}% of $memmax${color red}
+Root:${color white}
+    -Free: ${fs_free /}
+    -Used: ${fs_used /}
+    -Total: ${fs_size /}${color red}
+Home:${color white}
+    -Free: ${fs_free /home}
+    -Used: ${fs_used /home}
+    -Total: ${fs_size /home}
+$stippled_hr${color red}
+Access Point: ${alignr}${color white}${wireless_essid wlan0}${color red}
+Quality: ${alignr}${color white}${wireless_link_qual_perc wlan0}%${color red}
+Upload Speed: ${alignr}${color white}${upspeedf wlan0} Kb${color red}
+Download Speed: ${alignr}${color white}${downspeedf wlan0} Kb
+$stippled_hr
+${execpi 900 /home/lucian/Scripts/checkupdates.py -e '${color red}Updates:${color white} $n' -c 'white' -n 5}

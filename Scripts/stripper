@@ -1,0 +1,66 @@
+#!/usr/bin/python
+
+######## INFORMATION ####################
+# Script Name: stripper
+# Function: Remove erroroneous characters from filenames
+# Date: October 3rd 2010
+# Author: Lucian Adamson <lucian.adamson@yahoo.com>
+######## INFORMATION END #################
+
+######### INFORMATION ###################
+# This script was made so I can have an easier time
+# with filenames. Sometimes when I download stuff
+# filenames contain spaces and special characters. I
+# made this to counteract peoples bad file naming skills.
+#
+# To use, simply navigate to the directory in question.
+# Run this script without any flags or arguments.
+# The script will remove all the bullcrap characters.
+#
+# You can also run the script with the -n flag which will
+# only output the possible renaming scheme without
+# actually making changes to your file system.
+#
+# I recommend using the -n flag on each and every use
+# To see the possible outcome prior to finalizing
+#####################################
+
+###########  REMEMBER ##################
+# The best way to use this script is to place the script inside
+# one of the directories that are stored in your PATH 
+# environment variable. This way, you can simply type the
+# script name instead of the entire path, whether absolute
+# or relative. 
+# Remember to chmod +x the script
+# Example: chmod +x /path/to/stripper
+#####################################
+
+######## IMPORTS #######################
+# I almost always use standard libraries, but just in case
+# you happen to be missing any of those libraries, I may as
+# well put in a checker. That way your files remain safe.
+
+import os
+######## END IMPORTS ####################
+
+######## SET VARIABLES ###################
+toStrip="`!@#$%^&*()=+\|]}[{\"':;<,>?/ "
+# A string that holds all the characters we DONT want in a string.
+oldfile=""
+# Holds the unaltered filename
+######## END VARIABLES ###################
+
+######## CODE #################
+print("Modifying (" + str(len(os.listdir('.'))) + ") File(s)")
+print("Mod String: " + toStrip)
+
+for eachfile in os.listdir('.'):
+	oldfile=eachfile
+	for eachcode in toStrip:
+		eachfile=eachfile.replace(eachcode, "")
+	if not oldfile == eachfile:
+		os.rename(oldfile, eachfile)
+		print("stripper: " + oldfile + " -> " + eachfile)
+	else:
+		print("stripper: " + oldfile + " -> NO CHANGE")
+#############################

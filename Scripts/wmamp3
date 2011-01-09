@@ -1,0 +1,13 @@
+#!/bin/bash
+
+stripper
+
+for i in *.wma ; do
+mplayer -vo null -vc dummy -af resample=44100 -ao pcm:waveheader $i && lame -m s audiodump.wav -o $i
+done
+
+for j in *.wma ; do
+mv "$j" "`basename "$j" .wma`.mp3"
+done
+
+rm -rf ./*.wav

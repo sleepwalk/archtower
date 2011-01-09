@@ -1,1 +1,4 @@
-/home/lucian/.xinitrc
+#!/bin/bash
+
+gnome-session &
+conky -c ~/.conkyrc
